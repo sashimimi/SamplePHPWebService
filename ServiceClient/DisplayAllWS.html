@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Unit2Ex3</title>
+ </head>
+<body>
+<h3>
+Click button to view all records from lamm_class table
+
+<p>
+		<form id="target">
+			<input type="submit" value="Submit">
+		</form>
+	</p>
+	<br />
+
+-----------------------------------------------------------------------------	
+	<br />
+
+	<p>
+		<span id="aMessage"></span>
+     </p>
+</h3>	 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+<script>
+
+$('#target').submit(function(event) {
+
+	event.preventDefault();
+	
+	$.ajax({
+		type: 'POST',
+		url: '../ServiceProvider/DisplayAllWS.php',
+		data: 'NA', 
+		dataType: 'json',
+		encode: true
+	})
+	.done(function(data) {
+		$('#aMessage').text(data.results);
+	})
+	.fail(function() {
+		$('#aMessage').text('An error occurred. Please try again.');
+	});
+
+	});
+
+</script>
+</body>
+</html>
